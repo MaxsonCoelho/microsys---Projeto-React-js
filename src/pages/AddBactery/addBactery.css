@@ -1,0 +1,296 @@
+.containerAddBacteryAll {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row;
+    height: 800px;
+}
+
+.areaBackBactery {
+    width: 60px;
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.backBactery {
+    color: #000;
+    width: 50px;
+    display: flex;
+    height: 50px;
+    margin-top: 30px;
+}
+
+.areaFormAll {
+    margin-top: 120px;
+    width: 100%;
+    height: 650px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+}
+
+.areaFormBactery1 {
+    width: 410px;
+    border-radius: 7px;
+    background-color: rgb(202, 202, 202);
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.smallAreaBactery {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 60px;
+    margin: 2px;
+}
+
+.smallAreaBacteryImage {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 250px;
+    margin: 5px;
+}
+
+.label-avatar{
+    width: 300px;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  
+  }
+
+  .label-avatar input{
+    display: none;
+    margin: 3px 3px;
+  }
+
+  .label-avatar span{
+    z-index: 99;
+    position: absolute;
+    opacity: 0.7;
+    transition: all .5s;
+  }
+
+  .label-avatar span:hover{
+    opacity: 1;
+    transform: scale(1.4);
+  }
+
+.areaFormBactery2 {
+    width: 410px;
+    border-radius: 7px;
+    background-color: rgb(202, 202, 202);
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.smallDateArea {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 80px;
+    margin: 2px;
+}
+
+.smallNumberArea {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 45px;
+    margin: 2px;
+}
+
+.areaFormBactery3 {
+    width: 400px;
+    border-radius: 7px;
+    background-color: rgb(202, 202, 202);
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.optionsMorphological {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    flex-direction: row;
+    padding-top: 2px;
+}
+
+.addMorph {
+    display: flex;
+    width: 310px;
+    height: 120px;
+    position: absolute;
+    background-color: rgb(134, 134, 134);
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    flex-direction: column;
+    box-shadow: 5px 5px 5px rgb(99, 99, 99);
+}
+
+.addMorph span{
+    display: flex;
+    margin-bottom: 5px;
+    color: rgb(255, 255, 255);
+}
+
+#addMorph {
+    width: 80%;
+    height: 35px;
+    display: flex;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.buttonsAddMorph {
+    display: flex;
+    margin: 10px;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.smallAreaAdd {
+    display: flex;
+    flex-direction: column;
+    height: 60px;
+    margin: 2px;
+}
+
+#iconAdd {
+    display: flex;
+    margin-left: 10px;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+}
+
+#inputDays {
+    width: 100px;
+    display:flex;
+    border: none;
+    border-radius: 10px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.areaDays {
+    display: flex;
+}
+
+@media (max-width: 700px) {
+
+    .containerAddBacteryAll {
+        background-color: #fff;
+        display: flex;
+        flex-direction: row;
+        height: 800px;
+    }
+
+    .areaFormAll {
+        margin-top: 660px;
+        width: 100%;
+        height: 670px;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-around;
+    }
+
+    .areaFormBactery1 {
+        width: 280px;
+        border-radius: 7px;
+        background-color: rgb(202, 202, 202);
+        flex-direction: column;
+        display: flex;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    .areaFormBactery2 {
+        width: 280px;
+        border-radius: 7px;
+        background-color: rgb(202, 202, 202);
+        flex-direction: column;
+        display: flex;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    .areaFormBactery3 {
+        width: 280px;
+        border-radius: 7px;
+        background-color: rgb(202, 202, 202);
+        flex-direction: column;
+        display: flex;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    .smallAreaBactery {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        height: 60px;
+        margin: 2px;
+        align-items: center;
+    }
+
+    .smallDateArea {
+        display: flex;
+        flex-direction: column;
+        width: 280px;
+        height: 80px;
+        margin: 2px;
+        align-items: center;
+    }
+
+    #input {
+        width: 220px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+        padding: 7px;
+    }
+
+    .smallNumberArea {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        height: 45px;
+        margin: 2px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .smallAreaBacteryImage {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        height: 250px;
+        margin: 2px;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .label-avatar{
+        width: 300px;
+        height: 280px;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+      }
+    
+}

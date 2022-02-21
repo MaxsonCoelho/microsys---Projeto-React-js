@@ -1,0 +1,102 @@
+.containerProfile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.viewInfo {
+    padding: 30px;
+    width: 55%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.areaInfo {
+    flex-direction: row;
+    margin-bottom: 10px;
+    align-items: flex-end;
+    display: flex;
+}
+
+#iconProfile {
+    color: rgb(134, 134, 134);
+    width: 35px;
+    height: 35px;
+}
+
+legend {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+label {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 22px;
+}
+
+#buttonProfile {
+    background-color: rgb(134, 134, 134);
+    border-style: none;
+    border-radius: 3px;
+    width: 70px;
+    margin-right: 10px;
+    height: 18px;
+}
+
+#buttonProfile:hover {
+    background-color: #019dc3;
+}
+
+#inputProfile {
+    border-radius: 5px;
+    border-width: 0.5px;
+    border-style: solid;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-color: #019dc3;
+    height: 25px;
+    width: 200px;
+    padding-left: 5px;
+}
+
+#buttonPassword {
+    background-color: rgb(134, 134, 134);
+    border-style: none;
+    border-radius: 3px;
+    width: 200px;
+    height: 25px;
+    margin-top: 30px;
+}
+
+#buttonAreaPassword {
+    background-color: rgb(134, 134, 134);
+    border-style: none;
+    border-radius: 3px;
+    width: 130px;
+    margin-right: 10px;
+    height: 18px;
+}
+
+#buttonAreaPassword:hover {
+    background-color: #019dc3;
+}
+
+#buttonPassword:hover {
+    background-color: #019dc3;
+}
+
+#inputProfilePassword {
+    border-radius: 5px;
+    border-width: 0.5px;
+    border-style: solid;
+    border-color: #019dc3;
+    height: 25px;
+    width: 200px;
+    padding-left: 5px;
+    margin-right: 10px;
+}
+

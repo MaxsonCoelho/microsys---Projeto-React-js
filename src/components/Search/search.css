@@ -1,0 +1,35 @@
+#divBusca{
+  background-color:#ffffff;
+  border:none;
+  border-radius:15px;
+  width:230px;
+  margin-left: 30px;
+}
+
+#txtBusca{
+  float:left;
+  background-color:transparent;
+  padding-left:15px;
+  font-style:italic;
+  font-size:18px;
+  border:none;
+  height:32px;
+  width:200px;
+}
+
+#search{
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+@media(max-width: 700px) {
+  #divBusca{
+    width:180px;
+    margin-left: 0px;
+  }
+
+  #txtBusca{
+    width:150px;
+  }
+
+}

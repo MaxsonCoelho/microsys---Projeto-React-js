@@ -1,0 +1,135 @@
+.header{
+    flex-direction: row;
+    position: absolute;
+    top: 0;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #019dc3;
+    padding: 30px;
+}
+
+.header h2{
+    font-size: 25px;
+    color: #fff;
+    font-weight: bold;
+}
+
+.areaBack {
+    margin-top: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.back {
+    color: #fff;
+}
+
+.profile {
+    margin-top: 30px;
+    flex-direction: row;
+    width: 200px;
+    height: 100px;
+    position: absolute;
+    right: 50px;
+    cursor: pointer;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+}
+
+.profile span {
+    font-size: 20px;
+    color: #fff;
+}
+
+.menuNav{
+    width: 100px;
+    height: 60px;
+    margin-top: 30px;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 130px;
+    cursor: pointer;
+    border-color: #000;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #019dc3;
+}
+
+.menuNav ul {
+    padding: 10px;
+}
+
+li:hover{
+    width: 100px;
+    background-color: #fff;
+
+}
+
+li {
+    text-decoration: none;
+    color: #000;
+}
+
+@media (max-width: 700px) {
+    .header{
+        height: 150px;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .header h2{
+        font-size: 18px;
+        color: #fff;
+        text-align: center;
+    }
+
+    .areaBack {
+        position: absolute;
+        margin-top: 0;
+        left: 20px;
+        top: 15px;
+    }
+
+    .profile {
+        margin-top: 15px;
+        flex-direction: row;
+        width: 70px;
+        position: static;
+        cursor: pointer;
+        align-items: center;
+    }
+
+    .profile img {
+        width: 25px;
+        height: 25px;
+    }
+
+    .profile span {
+        font-size: 10px;
+        margin-left: 0px;
+        color: #fff;
+    }
+
+    .menuNav{
+        width: 100px;
+        height: 60px;
+        margin-top: 30px;
+        flex-direction: column;
+        position: absolute;
+        top: 45px;
+        right: 15px;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+        border-color: #000;
+        border-width: 1px;
+        border-style: solid;
+    }
+
+}

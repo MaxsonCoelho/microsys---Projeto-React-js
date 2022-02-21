@@ -1,0 +1,195 @@
+.containerUser{
+    flex: 1;
+    margin-top: 50px;
+    flex-direction: column;
+}
+
+.areaFormularyAll {
+    flex-direction: row;
+    flex: 1;
+    display: flex;
+    margin-top: 100px;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.areaFormularyAdd {
+    flex-direction: column;
+    width: 300px;
+    display: flex;
+    border-radius: 5px;
+    background-color: rgb(202, 202, 202);
+}
+
+#arrow{
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.smallAreaUsers {
+    flex-direction: column;
+    display: flex;
+    height: 60px;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.smallAreaUsers span {
+    font-size: 18px;
+    display: flex;
+    align-self: flex-start;
+    margin-left: 20px;
+}
+
+.smallAreaCheckBox {
+    margin-top: 10px;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.smallAreaCheckBox input {
+    margin-top: 5px;
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+}
+
+#input {
+    width: 260px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    padding: 7px;
+}
+
+#btnRegisterUse {
+    margin-top: 30px;
+    width: 85%;
+    border: none;
+    border-radius: 10px;
+    background-color: #019dc3;
+    font-weight: bold;
+    color: #fff;
+    font-size: 18px;
+    align-self: center;
+}
+
+.areaFomularyLis {
+    flex-direction: column;
+    width: 70%;
+    display: flex;
+}
+
+
+.options {
+    width: 30%;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10px;
+}
+
+#icon {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#icon:hover {
+    border: #019dc3 solid 1px;
+}
+
+.listHeader {
+    width: 100%;
+    height: 30px;
+    background-color: rgb(0, 81, 255);
+}
+
+#idEmail {
+    margin-left: 10px;
+}
+
+.listHeader span {
+    color: #fff;
+    padding-right: 30%;
+}
+
+
+@media (max-width: 700px) {
+
+    .containerUser{
+        flex: 1;
+        margin-top: 60px;
+    }
+    
+    .areaFormularyAll {
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .smallArea span {
+        font-size: 15px;
+    }
+
+    .areaFomularyLis {
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+        display: flex;
+        margin-left: 0px;
+        margin-top: 30px;
+    }
+
+    .listUser {
+        width: 100%;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-evenly;
+    }
+    
+    .containerUser {
+        flex-direction: row;
+        display: flex;
+    }
+    
+    .listUsers {
+        margin-left: 0px;
+        width: 100%;
+        display: flex;
+        justify-content:space-between;
+        margin-left: 5px;
+    }
+
+    #input {
+        width: 280px;
+        height: 35px;
+        padding: 7px;
+    }
+    
+    .listUsers span {
+        font-size: 14px;
+    }
+
+    #icon {
+        margin-left: initial;
+        width: 18px;
+        height: 18px;
+    }
+
+    .options {
+        width: 60px;
+        display: flex;
+        justify-content: flex-end;
+        margin-right: 0px;
+        padding-left: 5px;
+    }
+    
+
+}
+
