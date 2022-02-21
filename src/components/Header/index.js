@@ -26,7 +26,7 @@ export default function Header({ title, visible, offSearch, setDataFungic, setDa
                 <Search setDataFungic={setDataFungic} setDataBactery={setDataBactery}/>
             }
             <div className="profile" onClick={()=> menuProfile ? setMenuProfile(false) : setMenuProfile(true)}>
-                <span>usuário</span>
+                <span>Conta </span>
                 <img src={profile} alt="profile" />
             </div>
             {menuProfile && 
