@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://api.labmicrocba.com.br/microsys/test', //BaseUrl server
+  baseURL: 'https://api.labmicrocba.com.br/microsys/test', //BaseUrl server
   headers: {
     'Accept': '*/*',
     'Content-Type': 'application/json; charset=utf-8'
