@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import api from '../../services/api';
 import { AuthContext } from '../../contexts/auth';
-import VersionApp from '../../components/VersionApp';
 
 
 export default function CollectionBactery() {

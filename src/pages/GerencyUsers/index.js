@@ -7,8 +7,6 @@ import ProgressBar from '../../components/ProgressBar';
 import { AuthContext } from '../../contexts/auth';
 import TableUser from '../../components/TableUser';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import VersionApp from '../../components/VersionApp';
-
 
 
 export default function GerencyUsers() {
@@ -221,7 +219,6 @@ export default function GerencyUsers() {
           </div>
         }
       </div>
-      <VersionApp />
     </div>
   )
 }

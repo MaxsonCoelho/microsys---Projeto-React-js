@@ -798,7 +798,6 @@ export default function AddFungic(props){
                     </div>
                 </div>
             </div>
-            <VersionApp />
         </div>
     )
 }

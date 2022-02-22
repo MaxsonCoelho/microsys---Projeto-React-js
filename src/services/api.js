@@ -11,13 +11,9 @@ const api = axios.create({
 
 api.interceptors.response.use(
   response => {
-    // Do something with response data
     return response
   },
   error => {
-    // Do something with response error
-    // You can even test for a response code
-    // and try a new request before rejecting the promise
     if (
       error.request._hasError === true &&
       error.request._response.includes('connect')

@@ -10,8 +10,6 @@ import api from '../../services/api';
 import { AuthContext } from '../../contexts/auth';
 import { FiUpload } from 'react-icons/fi';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import VersionApp from '../../components/VersionApp';
-
 
 
 export default function AddBactery(props){
@@ -404,36 +402,6 @@ export default function AddBactery(props){
         getHost();
     }, []);
 
-    useEffect(()=> {
-
-        // async function getImages(){
-            console.log(props.location.urlImagem);
-        //     if(props.location.urlImagem === undefined){
-        //         return;
-        //     }
-        //     try{
-        //         let image;
-        //         let response = await api.get(`/files/image?urlImage=${props.location.urlImagem}`, {
-        //             headers:{
-        //                 'Content-type': 'application/json',
-        //                 'Authorization': `Bearer ${token}`,
-        //                 'Accept': '*/*'
-        //             }
-        //         });
-        //         const result = response.data;
-        //         image = Buffer.from(result, 'binary').toString('base64');
-        //         const formatImage = image ? ('data:image/;base64, ' + image) : undefined;
-                
-        //         console.log(imageUrl);
-        //     }
-        //     catch(error){
-        //         alert('Ocorreu um erro na exibição de imagens');
-        //         console.log(error);
-        //     }
-        // }
-        // setImageUrl(encodeURI(props.location.urlImagem));
-        // getImages();
-    }, [])
 
     return (
         <div className='containerAddBacteryAll'>
@@ -732,7 +700,6 @@ export default function AddBactery(props){
                     </div>
                 </div>
             </div>
-            <VersionApp />
         </div>
     )
 }
