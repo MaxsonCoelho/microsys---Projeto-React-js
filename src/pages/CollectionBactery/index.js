@@ -43,9 +43,6 @@ export default function CollectionBactery() {
   return (
     <div className="containerAll">
       <Header title={title} visible={visible} offSearch={offSearch} setDataBactery={setDataBactery}/>
-      {!dataBactery &&
-          <span>Não existem coleções bacterianas cadastradas no momento.</span> 
-      }
       <div className='containerTableBactery'>
         <TableBactery dataBactery={dataBactery} getBactery={getBactery}/>
       </div>
