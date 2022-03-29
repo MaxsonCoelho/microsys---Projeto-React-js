@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import api from '../../services/api';
 import { AuthContext } from '../../contexts/auth';
-import { FiUpload } from 'react-icons/fi';
+import { FiUpload, FiXCircle } from 'react-icons/fi';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import VersionApp from '../../components/VersionApp';
 
@@ -511,7 +511,7 @@ export default function AddFungic(props){
                         { imageUrl === null && urlImage === '' ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
-                            <img src={imageUrl || urlImage} width="70" alt="Perspectiva" />
+                            <img src={imageUrl || urlImage} width="50" height="50" alt="Perspectiva" />
                         }
                     </label>
                     <label className="label-avatar">
@@ -523,7 +523,7 @@ export default function AddFungic(props){
                         { imageVersoUrl === null && urlVerso === '' ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
-                            <img src={imageVersoUrl || urlVerso} width="70" alt="Verso" />
+                            <img src={imageVersoUrl || urlVerso} width="50" height="50" alt="Verso" />
                         }
                     </label>
                     <label className="label-avatar">
@@ -535,9 +535,15 @@ export default function AddFungic(props){
                         { imageMicroUrl === null && urlMicro === '' ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
-                            <img src={imageMicroUrl || urlMicro} width="70" alt="Microorganismo" />
+                            <img src={imageMicroUrl || urlMicro} width="50" height="50" alt="Microorganismo" />
                         }
                     </label>
+                    <span>Apagar fotos: <FiXCircle onClick={()=> {
+                        setImageUrl(null);
+                        setImageVersoUrl(null);
+                        setImageMicroUrl(null);
+                    }} color="#FFF" size={25}  />
+                    </span>
                 </div>
                     <div className='smallAreaFungic'>
                         <span>Código:</span>
