@@ -496,23 +496,7 @@ export default function AddBactery(props){
                     </div>
                     <div className='smallAreaBactery'>
                         <span>Cor:</span>
-                        <select value={color || props.location.cor} name="color" id="input" onChange={e=> setColor(e.target.value)}>
-                            <option value="">Selecione</option>
-                            <option value='verde'>verde</option>
-                            <option value='branco'>branco</option>
-                            <option value='branco/amarelo'>branco/amarelo</option>
-                            <option value='branco/marrom'>branco/marrom</option>
-                            <option value='branco/cinza'>branco/cinza</option>
-                            <option value='branco/rosa'>branco/rosa</option>
-                            <option value='amarelo'>amarelo</option>
-                            <option value='laranja'>laranja</option>
-                            <option value='rosa'>rosa</option>
-                            <option value='lilas/roxo'>lilas/roxo</option>
-                            <option value='bege'>bege</option>
-                            <option value='marrom'>marrom</option>
-                            <option value='preto'>preto</option>
-                            <option value='cinza'>cinza</option>
-                        </select>
+                        <input type="text" placeholder='Digite uma cor' name="color" id="input" value={color || props.location.cor} onChange={e=> setColor(e.target.value)}/>
                     </div>
                     <div className='smallAreaBactery'>
                         <span>Consistência:</span>
@@ -649,18 +633,7 @@ export default function AddBactery(props){
                     </div>
                     <div className='smallAreaBactery'>
                         <span>Propriedades:</span>
-                        <select value={properties || props.location.propriedades} name="properties" id="input" onChange={e=> setProperties(e.target.value)}>
-                            <option value="">Selecione</option>
-                            <option value='gramais'>gramais</option>
-                            <option value='gramenos'>gramenos</option>
-                            <option value='amilases'>amilases</option>
-                            <option value='lipases'>lipases</option>
-                            <option value='proteases'>proteases</option>
-                            <option value='biosurfactantes'>biosurfactantes</option>
-                            <option value='biorremediacao'>biorremediação</option>
-                            <option value='controle'>controle</option>
-                            <option value='inoculantes'>inoculantes</option>
-                        </select>
+                        <input type="text" placeholder='Digite uma propriedade' name="properties" id="input" value={properties || props.location.propriedades} onChange={e=> setProperties(e.target.value)}/>
                     </div>
                     <div className='smallAreaBactery'>
                         <span>Identificação Molecular:</span>
@@ -684,15 +657,7 @@ export default function AddBactery(props){
                     </div>
                     <div className='smallAreaBactery'>
                         <span>Pigmento:</span>
-                        <select value={pigment || props.location.pigmento} name="pigment" id="input" onChange={e=> setPigment(e.target.value)}>
-                            <option value="">Selecione</option>
-                            <option value='amarelo'>amarelo</option>
-                            <option value='vermelho'>vermelho</option>
-                            <option value='laranja'>laranja</option>
-                            <option value='lilas'>lilas</option>
-                            <option value='verde'>verde</option>
-                            <option value='azul'>azul</option>
-                        </select>
+                        <input type="text" placeholder='Digite um pigmento' name="pigment" id="input" value={pigment || props.location.pigmento} onChange={e=> setPigment(e.target.value)}/>
                     </div>
                     <div style={{marginTop: 30}}>
                         {props.location.buttonUpdate ?
