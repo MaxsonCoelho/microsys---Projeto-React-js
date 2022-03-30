@@ -88,6 +88,9 @@ export default function Profile(){
         }else if(confirmPassword !== newPassword){
             alert('Por favor insira a nova senha e a confirmação de senha iguais!');
             return
+        }else if (confirmPassword.length < 6 || newPassword.length < 6){
+            alert('Por favor insira uma senha com no mínimo 6 digitos !');
+            return
         }
 
         try{
