@@ -10,6 +10,7 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import EditIcon from '@mui/icons-material/Edit';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { AuthContext } from '../../contexts/auth';
@@ -65,6 +66,34 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
     hospedeiro: itemHost[0].descricao,
     morfologiaId: itemMorph[0].id,
     hospedeiroId: itemHost[0].id,
+    itemId: item.id,
+    buttonUpdate: buttonUpdate
+    });
+
+  }
+
+  const GeneratorPdf = async (item)=> {
+    console.log('qui')
+    history.push({pathname: 'pdf-generator/', 
+    codigo: item.codigo,
+    identMolecular: item.identMolecular,
+    cor: item.cor,
+    forma: item.forma,
+    elevacao: item.elevacao,
+    borda: item.borda,
+    superficie: item.superficie, 
+    consistencia: item.consistencia,
+    detalhes: item.detalhes,
+    pigmentos: item.pigmentos,
+    propriedades: item.propriedades,
+    meioIsolamento: item.meioIsolamento,
+    tempIncubacao: item.tempIncubacao,
+    descricaoIsolado: item.descricaoIsolado,
+    dataColeta: item.dataColeta,
+    dataReativacao: item.dataReativacao,
+    localColeta: item.localColeta,
+    morfologiaId: item.morfologiaId,
+    hospedeiroId: item.hospedeiroId,
     itemId: item.id,
     buttonUpdate: buttonUpdate
     });
@@ -160,6 +189,7 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
                     })}
                       <div className='areaActions'>
                       <VisibilityIcon id="icon" onClick={()=> getMorphological(row)} />
+                        <PictureAsPdfIcon id="icon" onClick={()=> GeneratorPdf(row)} />
                         <EditIcon id="icon" onClick={()=> getMorphological(row)} />
                         <DeleteForeverIcon id="icon" onClick={()=> directionRemove(row)} />
                       </div>
@@ -190,63 +220,3 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-// import * as React from 'react';
-// import './table.css';
-// import EditIcon from '@mui/icons-material/Edit';
-// import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-
-
-// export default function DataTable() {
-//   return (
-//     <div className='container'>
-//       <div className='areaFormulary2'>
-//             <div id='textUser'>
-//                 <span>Lista de microorganismos fúngicos:</span>
-//             </div>
-//             <div className='listHeader'>
-//                 <span id="idEmail">Descrição</span>
-//                 <span id="idEmail">Cor</span>
-//                 <span id="idEmail">Propriedades</span>
-//                 <span id="idEmail">Forma</span>
-//                 <span id="idEmail">Tipo</span>
-//             </div>
-//             <div className='listUser'>
-//                 {
-//                 data.map(m => (
-//                     <div className='containerUser'>
-//                     {loading ?
-//                         <ProgressBar />
-//                         :
-//                         <>
-//                         <div className='listUsers'>
-//                             <span>{m.name}</span>
-//                         </div>
-//                         <div className='listUsers'>
-//                             <span>{m.email}</span>
-//                         </div>
-//                         </>
-//                     }
-//                     <div className='options'>
-//                         <EditIcon id="icon"/>
-//                         <DeleteForeverIcon id="icon"/>
-//                     </div>
-//                     </div>
-//                 ))
-//                 }
-//             </div>
-            
-//         </div>
-//     </div>
-//   );
-// }

@@ -131,8 +131,8 @@ export default function AddBactery(props){
     async function addBactery(){
         setPassValidation(false);
         
-        if(imageUrl === undefined || imageVersoUrl === undefined || imageMicroUrl === undefined){
-            return alert('Adicione todas as imagens para continuar o registro deste fungo.');
+        if(imageUrl === undefined){
+            return alert('Adicione pelo menos uma imagem para continuar o registro deste fungo.');
         }
 
         if(morphological === '' || host === ''){
