@@ -15,6 +15,8 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import { AuthContext } from '../../contexts/auth';
 import './TableBactery.css';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 export default function StickyHeadTable({ dataBactery, getBactery }) {
   let history = useHistory();
@@ -72,32 +74,20 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
 
   }
 
-  const GeneratorPdf = async (item)=> {
-    console.log('qui')
-    history.push({pathname: 'pdf-generator/', 
-    codigo: item.codigo,
-    identMolecular: item.identMolecular,
-    cor: item.cor,
-    forma: item.forma,
-    elevacao: item.elevacao,
-    borda: item.borda,
-    superficie: item.superficie, 
-    consistencia: item.consistencia,
-    detalhes: item.detalhes,
-    pigmentos: item.pigmentos,
-    propriedades: item.propriedades,
-    meioIsolamento: item.meioIsolamento,
-    tempIncubacao: item.tempIncubacao,
-    descricaoIsolado: item.descricaoIsolado,
-    dataColeta: item.dataColeta,
-    dataReativacao: item.dataReativacao,
-    localColeta: item.localColeta,
-    morfologiaId: item.morfologiaId,
-    hospedeiroId: item.hospedeiroId,
-    itemId: item.id,
-    buttonUpdate: buttonUpdate
-    });
+  function clientePDF(clientes){
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    const reportTitle = [];
+    const details = [];
+    const rodape = [];
+    const docDefinitions = {
+      pageSize: 'A4',
+      pageMargins: [15, 50, 15, 40],
+      header: [reportTitle],
+      content: [details],
+      footer: [rodape]
+    }
 
+    pdfMake.createPdf(docDefinitions).download();
   }
 
   async function getMorphological(item){
@@ -189,7 +179,7 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
                     })}
                       <div className='areaActions'>
                       <VisibilityIcon id="icon" onClick={()=> getMorphological(row)} />
-                        <PictureAsPdfIcon id="icon" onClick={()=> GeneratorPdf(row)} />
+                        <PictureAsPdfIcon id="icon" onClick={()=> clientePDF(row)} />
                         <EditIcon id="icon" onClick={()=> getMorphological(row)} />
                         <DeleteForeverIcon id="icon" onClick={()=> directionRemove(row)} />
                       </div>
