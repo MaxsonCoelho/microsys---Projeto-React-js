@@ -102,17 +102,16 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const reportTitle = [
       {
-        text: 'Bactéria',
+        text: 'Microorganismo bacteriano',
         fontSize: 16,
         bold: true,
         margin: [15, 20, 0, 45] // left, top, right, bottom
       }
     ];
     const details = [
-      {text: '\n\nMicroorganismo bacteriano', style: 'header'},
       {
         image: formatImage,
-        width: 100
+        width: 70
       },
       {
         ul: [

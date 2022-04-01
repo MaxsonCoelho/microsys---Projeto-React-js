@@ -10,10 +10,13 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import EditIcon from '@mui/icons-material/Edit';
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import './TableFungic.css';
 import { AuthContext } from '../../contexts/auth';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
 
 export default function StickyHeadTable({ dataFungic, getFungic }) {
   let history = useHistory();
@@ -130,6 +133,124 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
       }
   }
 
+  async function generateImage(item){
+    try{
+      let image;
+      let response = await api.get(`/files/image?urlImage=${item.urlImagem}`, 
+      { 
+          responseType: 'arraybuffer',
+          headers:{
+              'Content-type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+              'Accept': '*/*'
+          }  
+      });
+      const result = response.data;
+      image = Buffer.from(result, 'binary').toString('base64');
+      const formatImage = image ? ('data:image/;base64, ' + image) : undefined;
+
+      let image2;
+      let response2 = await api.get(`/files/image?urlImage=${item.urlImagemVerso}`, 
+      { 
+          responseType: 'arraybuffer',
+          headers:{
+              'Content-type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+              'Accept': '*/*'
+          }  
+      });
+      const result2 = response2.data;
+      image2 = Buffer.from(result2, 'binary').toString('base64');
+      const formatImage2 = image2 ? ('data:image/;base64, ' + image2) : undefined;
+
+      let image3;
+      let response3 = await api.get(`/files/image?urlImage=${item.urlImagemMicro}`, 
+      { 
+          responseType: 'arraybuffer',
+          headers:{
+              'Content-type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+              'Accept': '*/*'
+          }  
+      });
+      const result3 = response3.data;
+      image3 = Buffer.from(result3, 'binary').toString('base64');
+      const formatImage3 = image3 ? ('data:image/;base64, ' + image3) : undefined;
+
+
+      clientePDF(item, formatImage, formatImage2, formatImage3);
+    }
+    catch(error){
+        alert('Ocorreu um erro na exibição de imagens');
+        console.log(error);
+    }
+  }
+
+  function clientePDF(item, formatImage, formatImage2, formatImage3){
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    const reportTitle = [
+      {
+        text: 'Microorganismo Fúngico',
+        fontSize: 16,
+        bold: true,
+        margin: [15, 20, 0, 45] // left, top, right, bottom
+      }
+    ];
+    const details = [
+      {
+        image: formatImage,
+        width: 70
+      },
+      {
+        image: formatImage2,
+        width: 70
+      },
+      {
+        image: formatImage3,
+        width: 70
+      },
+      {
+        ul: [
+          `Código: ${item.codigo}`,
+          `Identificação Molecular: ${item.identMolecular == undefined ? 'Não especificado' : item.identMolecular}`,
+          `Cor: ${item.cor == undefined ? 'Não especificado' : item.cor}`,
+          `Forma: ${item.forma  == undefined ? 'Não especificado' : item.forma}`,
+          `Elevação: ${item.elevacao == undefined ? 'Não especificado' : item.elevacao}`,
+          `Borda: ${item.borda == undefined ? 'Não especificado' : item.borda}`,
+          `Superfície: ${item.superficie == undefined ? 'Não especificado' : item.superficie}`, 
+          `Pigmento: ${item.pigmento == undefined ? 'Não especificado' : item.pigmento}`,
+          `Propriedades: ${item.propriedades == undefined ? 'Não especificado' : item.propriedades}`,
+          `Meio de Isolamento: ${item.meioIsolamento == undefined ? 'Não especificado' : item.meioIsolamento}`,
+          `Tempo de Incubação: ${item.tempIncubacao == undefined ? 'Não especificado' : item.tempIncubacao}`,
+          `Descrição do Isolado: ${item.descricaoIsolado == undefined ? 'Não especificado' : item.descricaoIsolado}`,
+          `Data de Coleta: ${item.dataColeta == undefined ? 'Não especificado' : item.dataColeta}`,
+          `Data de Reativação: ${item.dataReativacao == undefined ? 'Não especificado' : item.dataReativacao}`,
+          `Local de Coleta: ${item.localColeta == undefined ? 'Não especificado' : item.localColeta}`,
+        ]
+      }
+    ];
+    function rodape(currentPage, pageCount){
+      return [
+        {
+          text: currentPage + ' / ' + pageCount,
+          alignment: 'right',
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 20, 0] // left, top, right, bottom
+        }
+      ]
+    }
+    const docDefinitions = {
+      pageSize: 'A4',
+      pageMargins: [15, 50, 15, 40],
+      header: [reportTitle],
+      content: [details],
+      footer: rodape
+    }
+
+    pdfMake.createPdf(docDefinitions).download();
+  }
+
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -166,6 +287,7 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
                     })}
                       <div className='areaActions'>
                         <VisibilityIcon id="icon" onClick={()=> getMorphological(row)} />
+                        <PictureAsPdfIcon id="icon" onClick={()=> generateImage(row)} />
                         <EditIcon id="icon" onClick={()=> getMorphological(row)} />
                         <DeleteForeverIcon id="icon" onClick={()=> directionRemove(row)} />
                       </div>
