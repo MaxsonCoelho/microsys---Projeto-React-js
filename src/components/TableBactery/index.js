@@ -55,14 +55,16 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
     borda: item.borda,
     superficie: item.superficie, 
     consistencia: item.consistencia,
-    detalhes: item.detalhes,
-    pigmentos: item.pigmentos,
+    detOpticos: item.detOpticos,
+    urlImagem: item.urlImagem,
+    pigmento: item.pigmento,
     propriedades: item.propriedades,
     meioIsolamento: item.meioIsolamento,
     tempIncubacao: item.tempIncubacao,
     descricaoIsolado: item.descricaoIsolado,
     dataColeta: item.dataColeta,
     dataReativacao: item.dataReativacao,
+    esporula: item.esporula,
     localColeta: item.localColeta,
     morfologia: itemMorph[0].descricao,
     hospedeiro: itemHost[0].descricao,
@@ -74,17 +76,74 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
 
   }
 
-  function clientePDF(clientes){
+  function clientePDF(item){
+    // codigo: item.codigo,
+    // identMolecular: item.identMolecular,
+    // cor: item.cor,
+    // forma: item.forma,
+    // elevacao: item.elevacao,
+    // borda: item.borda,
+    // superficie: item.superficie, 
+    // consistencia: item.consistencia,
+    // detalhes: item.detalhes,
+    // pigmentos: item.pigmentos,
+    // propriedades: item.propriedades,
+    // meioIsolamento: item.meioIsolamento,
+    // tempIncubacao: item.tempIncubacao,
+    // descricaoIsolado: item.descricaoIsolado,
+    // dataColeta: item.dataColeta,
+    // dataReativacao: item.dataReativacao,
+    // localColeta: item.localColeta,
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
-    const reportTitle = [];
-    const details = [];
-    const rodape = [];
+    const reportTitle = [
+      {
+        text: 'Bactéria',
+        fontSize: 16,
+        bold: true,
+        margin: [15, 20, 0, 45] // left, top, right, bottom
+      }
+    ];
+    const details = [
+      {text: '\n\nMicroorganismo bacteriano', style: 'header'},
+      {
+        ul: [
+          `Código: ${item.codigo}`,
+          `Identificação Molecular: ${item.identMolecular == undefined ? 'Não especificado' : item.identMolecular}`,
+          `Cor: ${item.cor == undefined ? 'Não especificado' : item.cor}`,
+          `Forma: ${item.forma  == undefined ? 'Não especificado' : item.forma}`,
+          `Elevação: ${item.elevacao == undefined ? 'Não especificado' : item.elevacao}`,
+          `Borda: ${item.borda == undefined ? 'Não especificado' : item.borda}`,
+          `Superfície: ${item.superficie == undefined ? 'Não especificado' : item.superficie}`, 
+          `Consistência: ${item.consistencia == undefined ? 'Não especificado' : item.consistencia}`,
+          `Detalhes Ópticos: ${item.detOpticos == undefined ? 'Não especificado' : item.detOpticos}`,
+          `Pigmento: ${item.pigmento == undefined ? 'Não especificado' : item.pigmento}`,
+          `Propriedades: ${item.propriedades == undefined ? 'Não especificado' : item.propriedades}`,
+          `Meio de Isolamento: ${item.meioIsolamento == undefined ? 'Não especificado' : item.meioIsolamento}`,
+          `Tempo de Incubação: ${item.tempIncubacao == undefined ? 'Não especificado' : item.tempIncubacao}`,
+          `Descrição do Isolado: ${item.descricaoIsolado == undefined ? 'Não especificado' : item.descricaoIsolado}`,
+          `Data de Coleta: ${item.dataColeta == undefined ? 'Não especificado' : item.dataColeta}`,
+          `Data de Reativação: ${item.dataReativacao == undefined ? 'Não especificado' : item.dataReativacao}`,
+          `Local de Coleta: ${item.localColeta == undefined ? 'Não especificado' : item.localColeta}`,
+        ]
+      }
+    ];
+    function rodape(currentPage, pageCount){
+      return [
+        {
+          text: currentPage + ' / ' + pageCount,
+          alignment: 'right',
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 20, 0] // left, top, right, bottom
+        }
+      ]
+    }
     const docDefinitions = {
       pageSize: 'A4',
       pageMargins: [15, 50, 15, 40],
       header: [reportTitle],
       content: [details],
-      footer: [rodape]
+      footer: rodape
     }
 
     pdfMake.createPdf(docDefinitions).download();

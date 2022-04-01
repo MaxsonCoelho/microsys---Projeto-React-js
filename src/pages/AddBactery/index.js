@@ -255,16 +255,15 @@ export default function AddBactery(props){
     }
     //continuar criando upload api
     async function handleUpload(idBactery){
+        console.log(idBactery)
         const currentUid = idBactery; 
 
         const body = new FormData();
-        body.append('urlImagem', filePhoto);
-        body.append('urlImagemVerso', filePhotoVerso);
-        body.append('urlImagemMicro', filePhotoMicro);
+        body.append('urlImagem', filePhotoMicro);
     
         try{
             api.defaults.headers.Authorization = `Bearer ${token}`;
-            await api.patch(`/bacterias/${currentUid}/images`, body);
+            await api.patch(`/bacterias/${currentUid}/image`, body);
         }
         catch (error){
             console.log(error);
@@ -272,7 +271,7 @@ export default function AddBactery(props){
     }
 
     async function uploadImages(idBactery){
-        if((filePhoto && filePhotoVerso && filePhotoMicro) !== null){
+        if(filePhotoMicro != null){
             handleUpload(idBactery);
         }
         return
@@ -329,7 +328,7 @@ export default function AddBactery(props){
             setStartIncubation(0);
             setCode('');
             setPigment('');
-
+            
             handleUpload(props.location.itemId);
             getMorphological();
             alert('Registro atualizado com sucesso!');
@@ -402,6 +401,40 @@ export default function AddBactery(props){
         getHost();
     }, []);
 
+    async function getImages(){
+        if(props.location.urlImagem === undefined){
+            return;
+        }else {
+            try{
+                let image;
+                let response = await api.get(`/files/image?urlImage=${props.location.urlImagem}`, 
+                { 
+                    responseType: 'arraybuffer',
+                    headers:{
+                        'Content-type': 'application/json',
+                        'Authorization': `Bearer ${token}`,
+                        'Accept': '*/*'
+                    }  
+                });
+                const result = response.data;
+                image = Buffer.from(result, 'binary').toString('base64');
+                const formatImage = image ? ('data:image/;base64, ' + image) : undefined;
+                let formatUrl = encodeURI(formatImage);
+                setImageMicroUrl(formatUrl);
+                
+            }
+            catch(error){
+                alert('Ocorreu um erro na exibição de imagens');
+                console.log(error);
+            }
+        }
+        
+    }
+
+    useEffect(()=> {
+        getImages();
+    }, []);
+
 
     return (
         <div className='containerAddBacteryAll'>
@@ -412,32 +445,7 @@ export default function AddBactery(props){
             <div className='areaFormAll'>
                 <div className='areaFormBactery1'>
                 <div className='smallAreaBacteryImage'>
-                    <span>Adicionar fotos: </span>
-                    <label className="label-avatar">
-                        <span>
-                            <FiUpload color="#FFF" size={25} />
-                        </span>
-
-                        <input type="file" accept="image/*" onChange={handleFileImage}  /><br/>
-                        { imageUrl === null ? 
-                            <AddPhotoAlternateIcon width="50" height="50"/>
-                            :
-                            <img src={imageUrl} width="50" height="50" alt="Perspectiva" />
-                        }
-                    </label>
-                    
-                    <label className="label-avatar">
-                        <span>
-                            <FiUpload color="#FFF" size={25} />
-                        </span>
-
-                        <input type="file" accept="image/*" onChange={handleFileImageVerso}  /><br/>
-                        { imageVersoUrl === null ? 
-                            <AddPhotoAlternateIcon width="50" height="50"/>
-                            : 
-                            <img src={imageVersoUrl} width="50" height="50" alt="Verso" />
-                        }
-                    </label>
+                    <span>Adicionar foto: </span>
                     <label className="label-avatar">
                         <span>
                             <FiUpload color="#FFF" size={25} />
@@ -450,9 +458,7 @@ export default function AddBactery(props){
                             <img src={imageMicroUrl} width="50" height="50" alt="Microorganismo" />
                         }
                     </label>
-                    <span>Apagar fotos: <FiXCircle onClick={()=> {
-                        setImageUrl(null);
-                        setImageVersoUrl(null);
+                    <span>Apagar foto: <FiXCircle onClick={()=> {
                         setImageMicroUrl(null);
                     }} color="#FFF" size={25}  />
                     </span>
@@ -484,8 +490,6 @@ export default function AddBactery(props){
                             <option value='filamentos'>filamentos</option>
                         </select>
                     </div>
-                </div>
-                <div className='areaFormBactery2'>
                     <div className='smallAreaBactery'>
                         <span>Tipo de crescimento:</span>
                         <select value={typeGrowth || props.location.tipoCresc} name="typeGrowth" id="input" onChange={e=> setTypeGrowth(e.target.value)}>
@@ -494,13 +498,15 @@ export default function AddBactery(props){
                             <option value='invasivo'>invasivo</option>
                         </select>
                     </div>
+                </div>
+                <div className='areaFormBactery2'>
                     <div className='smallAreaBactery'>
                         <span>Cor:</span>
                         <input type="text" placeholder='Digite uma cor' name="color" id="input" value={color || props.location.cor} onChange={e=> setColor(e.target.value)}/>
                     </div>
                     <div className='smallAreaBactery'>
                         <span>Consistência:</span>
-                        <select value={consistence || props.location.consistence} name="color" id="input" onChange={e=> setConsistence(e.target.value)}>
+                        <select value={consistence || props.location.consistencia} name="color" id="input" onChange={e=> setConsistence(e.target.value)}>
                             <option value="">Selecione</option>
                             <option value='seca'>seca</option>
                             <option value='aquosa'>aquosa</option>
