@@ -421,7 +421,6 @@ export default function AddBactery(props){
                 const formatImage = image ? ('data:image/;base64, ' + image) : undefined;
                 let formatUrl = encodeURI(formatImage);
                 setImageMicroUrl(formatUrl);
-                
             }
             catch(error){
                 alert('Ocorreu um erro na exibição de imagens');
