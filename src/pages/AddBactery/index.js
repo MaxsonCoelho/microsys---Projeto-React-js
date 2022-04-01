@@ -255,7 +255,7 @@ export default function AddBactery(props){
     }
     //continuar criando upload api
     async function handleUpload(idBactery){
-        console.log(idBactery)
+        
         const currentUid = idBactery; 
 
         const body = new FormData();

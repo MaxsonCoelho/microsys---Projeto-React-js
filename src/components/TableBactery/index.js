@@ -24,7 +24,6 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [buttonUpdate, setButtonUpdate] = useState(true);
-  
 
   const columns = [
     { id: 'codigo', label: 'Código', minWidth: 130 },
@@ -76,24 +75,30 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
 
   }
 
-  function clientePDF(item){
-    // codigo: item.codigo,
-    // identMolecular: item.identMolecular,
-    // cor: item.cor,
-    // forma: item.forma,
-    // elevacao: item.elevacao,
-    // borda: item.borda,
-    // superficie: item.superficie, 
-    // consistencia: item.consistencia,
-    // detalhes: item.detalhes,
-    // pigmentos: item.pigmentos,
-    // propriedades: item.propriedades,
-    // meioIsolamento: item.meioIsolamento,
-    // tempIncubacao: item.tempIncubacao,
-    // descricaoIsolado: item.descricaoIsolado,
-    // dataColeta: item.dataColeta,
-    // dataReativacao: item.dataReativacao,
-    // localColeta: item.localColeta,
+  async function generateImage(item){
+    try{
+      let image;
+      let response = await api.get(`/files/image?urlImage=${item.urlImagem}`, 
+      { 
+          responseType: 'arraybuffer',
+          headers:{
+              'Content-type': 'application/json',
+              'Authorization': `Bearer ${token}`,
+              'Accept': '*/*'
+          }  
+      });
+      const result = response.data;
+      image = Buffer.from(result, 'binary').toString('base64');
+      const formatImage = image ? ('data:image/;base64, ' + image) : undefined;
+      clientePDF(item, formatImage)
+    }
+    catch(error){
+        alert('Ocorreu um erro na exibição de imagens');
+        console.log(error);
+    }
+  }
+
+  function clientePDF(item, formatImage){
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const reportTitle = [
       {
@@ -105,6 +110,10 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
     ];
     const details = [
       {text: '\n\nMicroorganismo bacteriano', style: 'header'},
+      {
+        image: formatImage,
+        width: 100
+      },
       {
         ul: [
           `Código: ${item.codigo}`,
@@ -238,7 +247,7 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
                     })}
                       <div className='areaActions'>
                       <VisibilityIcon id="icon" onClick={()=> getMorphological(row)} />
-                        <PictureAsPdfIcon id="icon" onClick={()=> clientePDF(row)} />
+                        <PictureAsPdfIcon id="icon" onClick={()=> generateImage(row)} />
                         <EditIcon id="icon" onClick={()=> getMorphological(row)} />
                         <DeleteForeverIcon id="icon" onClick={()=> directionRemove(row)} />
                       </div>
