@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import api from '../../services/api';
 import { AuthContext } from '../../contexts/auth';
+import CircularIndeterminate from '../../components/CircularProgress';
 
 
 export default function CollectionFungic() {
@@ -15,10 +16,11 @@ export default function CollectionFungic() {
   const [visible, setVisible] = useState(true);
   const [offSearch, setOffSearch] = useState(true);
   const [dataFungic, setDataFungic] = React.useState([]);
+  const [loading, setLoading] = useState(false);
 
 
   async function getFungic(){
-
+    setLoading(true);
     try{
       const response = await api.get('/fungos',{
         headers:{
@@ -30,8 +32,10 @@ export default function CollectionFungic() {
   
       const result = response.data;
       setDataFungic(result.reverse());
+      setLoading(false);
     }
     catch(error){
+      setLoading(false);
       alert('Erro na listagem de coleções fúngicas, verifique sua conexão com a internet.')
       console.log(error);
     }
@@ -49,7 +53,11 @@ export default function CollectionFungic() {
           <span>Não existem coleções fúngicas cadastradas no momento.</span> 
       }
       <div className='containerTable'>
+      {loading ?
+        <CircularIndeterminate />
+        :
         <TableFungic dataFungic={dataFungic} getFungic={getFungic}/>
+      }
       </div>
       <div className='areaButton'>
         <Link to='/adicao-fungica'>
