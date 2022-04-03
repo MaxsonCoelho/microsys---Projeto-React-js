@@ -17,6 +17,7 @@ import { AuthContext } from '../../contexts/auth';
 import './TableBactery.css';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import htmlToPdfmake from "html-to-pdfmake"
 
 export default function StickyHeadTable({ dataBactery, getBactery }) {
   let history = useHistory();
@@ -102,39 +103,46 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const reportTitle = [
       {
-        text: 'Microorganismo bacteriano',
-        fontSize: 16,
+        text: 'Centro de Biotécnologia da Amazônia',
+        fontSize: 20,
         bold: true,
-        margin: [15, 20, 0, 45] // left, top, right, bottom
+        margin: [135, 20, 0, 30] // left, top, right, bottom
       }
     ];
-    const details = [
-      {
-        image: formatImage,
-        width: 70
-      },
-      {
-        ul: [
-          `Código: ${item.codigo}`,
-          `Identificação Molecular: ${item.identMolecular == undefined ? 'Não especificado' : item.identMolecular}`,
-          `Cor: ${item.cor == undefined ? 'Não especificado' : item.cor}`,
-          `Forma: ${item.forma  == undefined ? 'Não especificado' : item.forma}`,
-          `Elevação: ${item.elevacao == undefined ? 'Não especificado' : item.elevacao}`,
-          `Borda: ${item.borda == undefined ? 'Não especificado' : item.borda}`,
-          `Superfície: ${item.superficie == undefined ? 'Não especificado' : item.superficie}`, 
-          `Consistência: ${item.consistencia == undefined ? 'Não especificado' : item.consistencia}`,
-          `Detalhes Ópticos: ${item.detOpticos == undefined ? 'Não especificado' : item.detOpticos}`,
-          `Pigmento: ${item.pigmento == undefined ? 'Não especificado' : item.pigmento}`,
-          `Propriedades: ${item.propriedades == undefined ? 'Não especificado' : item.propriedades}`,
-          `Meio de Isolamento: ${item.meioIsolamento == undefined ? 'Não especificado' : item.meioIsolamento}`,
-          `Tempo de Incubação: ${item.tempIncubacao == undefined ? 'Não especificado' : item.tempIncubacao}`,
-          `Descrição do Isolado: ${item.descricaoIsolado == undefined ? 'Não especificado' : item.descricaoIsolado}`,
-          `Data de Coleta: ${item.dataColeta == undefined ? 'Não especificado' : item.dataColeta}`,
-          `Data de Reativação: ${item.dataReativacao == undefined ? 'Não especificado' : item.dataReativacao}`,
-          `Local de Coleta: ${item.localColeta == undefined ? 'Não especificado' : item.localColeta}`,
-        ]
-      }
-    ];
+    const html = htmlToPdfmake(
+      ` <h5>Microorganismo Bacteriano</h5>
+      <p>Foto 1</p><img src="${formatImage}" width="70" />
+      <p>Detalhes</p>
+      <table width="100%" border="1"  cellpadding="0" cellspacing="0">
+      <tr>
+         <td width="11%" >
+            <table><font  size="1">
+                 <tr><td><strong>Código: ${item.codigo}</strong></td></tr>
+                 <tr><td><strong>Identificação Molecular: ${item.identMolecular == undefined ? 'Não especificado' : item.identMolecular}</strong></td></tr>
+                 <tr><td><strong>Cor: ${item.cor == undefined ? 'Não especificado' : item.cor}</strong></td></tr>
+                 <tr><td><strong>Forma: ${item.forma  == undefined ? 'Não especificado' : item.forma}</strong></td></tr>
+                 <tr><td><strong>Elevação: ${item.elevacao == undefined ? 'Não especificado' : item.elevacao}</strong></td></tr>
+                 <tr><td><strong>Tipo de Crescimento: ${item.tipoCresc == undefined ? 'Não especificado' : item.tipoCresc}</strong></td></tr>
+                 <tr><td><strong>Borda: ${item.borda == undefined ? 'Não especificado' : item.borda}</strong></td></tr>
+                 <tr><td><strong>Esporula: ${item.esporula == undefined ? 'Não especificado' : item.esporula}</strong></td></tr>
+                 <tr><td><strong>Superfície: ${item.superficie == undefined ? 'Não especificado' : item.superficie}</strong></td></tr>
+                 <tr><td><strong>Consistência: ${item.consistencia == undefined ? 'Não especificado' : item.consistencia}</strong></td></tr>
+                 <tr><td><strong>Detalhes Ópticos: ${item.detOpticos == undefined ? 'Não especificado' : item.detOpticos}</strong></td></tr>
+                 <tr><td><strong>Pigmento: ${item.pigmento == undefined ? 'Não especificado' : item.pigmento}</strong></td></tr>
+                 <tr><td><strong>Propriedades: ${item.propriedades == undefined ? 'Não especificado' : item.propriedades}</strong></td></tr>
+                 <tr><td><strong>Meio de Isolamento: ${item.meioIsolamento == undefined ? 'Não especificado' : item.meioIsolamento}</strong></td></tr>
+                 <tr><td><strong>Tempo de Incubação: ${item.tempIncubacao == undefined ? 'Não especificado' : item.tempIncubacao}</strong></td></tr>
+                 <tr><td><strong>Descrição do Isolado: ${item.descricaoIsolado == undefined ? 'Não especificado' : item.descricaoIsolado}</strong></td></tr>
+                 <tr><td><strong>Data de Coleta: ${item.dataColeta == undefined ? 'Não especificado' : item.dataColeta}</strong></td></tr>
+                 <tr><td><strong>Local de Coleta: ${item.localColeta == undefined ? 'Não especificado' : item.localColeta}</strong></td></tr>
+                 <tr><td><strong>Data de Reativação: ${item.dataReativacao == undefined ? 'Não especificado' : item.dataReativacao}</strong></td></tr>
+                 </tr></font>
+             </table>
+        </td>
+      </tr>
+   </table>
+   `
+    )
     function rodape(currentPage, pageCount){
       return [
         {
@@ -150,7 +158,7 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
       pageSize: 'A4',
       pageMargins: [15, 50, 15, 40],
       header: [reportTitle],
-      content: [details],
+      content: [html],
       footer: rodape
     }
 
