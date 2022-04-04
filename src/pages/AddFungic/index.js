@@ -11,6 +11,7 @@ import { AuthContext } from '../../contexts/auth';
 import { MicroContext } from '../../contexts/microorganismos';
 import { FiUpload, FiXCircle } from 'react-icons/fi';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import CircularIndeterminate from '../../components/CircularProgress';
 
 
 
@@ -514,7 +515,14 @@ export default function AddFungic(props){
 
                         <input type="file" accept="image/*" onChange={handleFileImage}  /><br/>
                         { imageUrl === null && urlImage === '' ? 
-                            <AddPhotoAlternateIcon width="50" height="50" />
+                            <>
+                            {updateTitle ?
+                                <CircularIndeterminate />
+                                :
+                                null
+                            }
+                            <AddPhotoAlternateIcon width="50" height="50"/>
+                            </>
                             :
                             <img src={imageUrl || urlImage} width="50" height="50" />
                         }

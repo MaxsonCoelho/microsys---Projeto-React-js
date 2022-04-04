@@ -11,6 +11,7 @@ import { AuthContext } from '../../contexts/auth';
 import { FiUpload, FiXCircle } from 'react-icons/fi';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import { MicroContext } from '../../contexts/microorganismos';
+import CircularIndeterminate from '../../components/CircularProgress';
 
 
 export default function AddBactery(props){
@@ -57,6 +58,7 @@ export default function AddBactery(props){
     const [idHost, setIdHost] = useState();
     const [idBactery, setIdBactery] = useState('');
     const [passValidation, setPassValidation] = useState(false);
+    const [updateTitle, setUpdateTitle] = useState('ATUALIZAR');
 
     function addMorphological(){
         setOpenAddMorph(true);
@@ -434,7 +436,7 @@ export default function AddBactery(props){
 
     useEffect(()=> {
         getImages();
-    }, []);
+    }, [updateTitle]);
 
 
     return (
@@ -454,7 +456,14 @@ export default function AddBactery(props){
 
                         <input type="file" accept="image/*" onChange={handleFileImageMicro}  /><br/>
                         { imageMicroUrl === null ? 
-                            <AddPhotoAlternateIcon width="50" height="50"/>
+                            <>
+                                {updateTitle ?
+                                    <CircularIndeterminate />
+                                    :
+                                    null
+                                }
+                                <AddPhotoAlternateIcon width="50" height="50"/>
+                            </>
                             :
                             <img src={imageMicroUrl} width="50" height="50" alt="Microorganismo" />
                         }
@@ -674,7 +683,7 @@ export default function AddBactery(props){
                     <div style={{marginTop: 30}}>
                         {props.location.buttonUpdate ?
                             <Stack spacing={2} direction="row">
-                                <Button onClick={editBactery} size='large' variant="contained">ATUALIZAR</Button>
+                                <Button onClick={editBactery} size='large' variant="contained">{updateTitle}</Button>
                             </Stack>
                             :
                             <Stack spacing={2} direction="row">
