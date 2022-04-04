@@ -224,7 +224,7 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
     }
     const html = htmlToPdfmake(
       ` <h5>Microorganismo Fúngico</h5>
-      <p>Foto 1</p><img src="${formatImage}" width="70" height="70"/><p>Foto 2</p><img src="${formatImage2}" width="70" height="70"/><p>Foto 3</p><img src="${formatImage3}" width="70" height="70"/>
+      <p>Foto 1</p><img src="${formatImage}" width="70" height="70"/><p>Foto 2</p>
       <p>Detalhes</p>
       <table width="100%" border="1"  cellpadding="0" cellspacing="0">
       <tr>

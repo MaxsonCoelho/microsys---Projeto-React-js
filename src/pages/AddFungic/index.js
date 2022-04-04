@@ -514,7 +514,7 @@ export default function AddFungic(props){
                         </span>
 
                         <input type="file" accept="image/*" onChange={handleFileImage}  /><br/>
-                        { imageUrl === null && urlImage === '' ? 
+                        { imageUrl === null ? 
                             <>
                             {updateTitle ?
                                 <CircularIndeterminate />
@@ -533,7 +533,7 @@ export default function AddFungic(props){
                         </span>
 
                         <input type="file" accept="image/*" onChange={handleFileImageVerso}  /><br/>
-                        { imageVersoUrl === null && urlVerso === '' ? 
+                        { imageVersoUrl === null ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
                             <img src={imageVersoUrl || urlVerso} width="50" height="50" />
@@ -545,7 +545,7 @@ export default function AddFungic(props){
                         </span>
 
                         <input type="file" accept="image/*" onChange={handleFileImageMicro}  /><br/>
-                        { imageMicroUrl === null && urlMicro === '' ? 
+                        { imageMicroUrl === null ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
                             <img src={imageMicroUrl || urlMicro} width="50" height="50" />
