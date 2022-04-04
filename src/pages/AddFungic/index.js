@@ -8,15 +8,16 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import api from '../../services/api';
 import { AuthContext } from '../../contexts/auth';
+import { MicroContext } from '../../contexts/microorganismos';
 import { FiUpload, FiXCircle } from 'react-icons/fi';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
-import VersionApp from '../../components/VersionApp';
 
 
 
 export default function AddFungic(props){
     let history = useHistory();
     const { token } = useContext(AuthContext);
+    const { activeDeletePhotos } = useContext(MicroContext);
     const [title, setTitle] = useState('CADASTRAR COLÔNIA FÚNGICA');
     const [visible, setVisible] = useState(false);
     const [offSearch, setOffSearch] = useState(false);
@@ -59,6 +60,7 @@ export default function AddFungic(props){
     const [idMorph, setIdMorph] = useState();
     const [idHost, setIdHost] = useState();
     const [passValidation, setPassValidation] = useState(false);
+    const [updateTitle, setUpdateTitle] = useState('ATUALIZAR');
 
     function addMorphological(){
         setOpenAddMorph(true);
@@ -135,11 +137,11 @@ export default function AddFungic(props){
         setPassValidation(false);
         
         if(imageUrl === undefined){
-            return alert('Adicione pelo menos uma imagem para continuar o registro deste fungo.');
+            return alert('Adicione pelo menos uma imagem para continuar o registro deste microorganismo.');
         }
 
-        if(morphological === '' || host === ''){
-            return alert('Escolha uma identificação Morfológica e uma Origem para o hospedeiro.');
+        if(host === ''){
+            return alert('Escolha uma Origem para o hospedeiro.');
         }
 
         const body = {
@@ -258,16 +260,16 @@ export default function AddFungic(props){
 
     //continuar criando upload api
     async function handleUpload(idFungic){
-        const currentUid = idFungic; 
         
-        const body = new FormData();
-        body.append('urlImagem', filePhoto || urlImage);
-        body.append('urlImagemVerso', filePhotoVerso || urlVerso);
-        body.append('urlImagemMicro', filePhotoMicro || urlMicro);
-    
         try{
+            const body = new FormData();
+            body.append('urlImagem', filePhoto);
+            body.append('urlImagemVerso', filePhotoVerso);
+            body.append('urlImagemMicro', filePhotoMicro);
+            console.log(body);
+
             api.defaults.headers.Authorization = `Bearer ${token}`;
-            await api.patch(`/fungos/${currentUid}/images`, body);
+            await api.patch(`/fungos/${idFungic}/images`, body);
         }
         catch (error){
             console.log(error);
@@ -275,13 +277,11 @@ export default function AddFungic(props){
     }
 
     async function uploadImages(idFungic){
-        if((filePhoto && filePhotoVerso && filePhotoMicro) !== null){
-            handleUpload(idFungic);
-        }
-        return
+        handleUpload(idFungic);
     }
 
     async function editFungic(){
+        
         let body = {
             codigo: code || props.location.codigo,
             identMolecular: molecularIdentification || props.location.identMolecular,
@@ -333,10 +333,13 @@ export default function AddFungic(props){
             setCode('');
             setPigment('');
 
-            handleUpload(props.location.itemId);
-            getMorphological();
-            alert('Registro atualizado com sucesso!');
-            history.push('/colecao-fungica');
+            handleUpload(props.location.itemId)
+            .then(() => {
+                getMorphological();
+                alert('Registro atualizado com sucesso!');
+                history.push('/colecao-fungica');
+            })
+            
         }
         catch(error){
             console.log(error);
@@ -406,7 +409,8 @@ export default function AddFungic(props){
     }, []);
 
     async function getImages(){
-        if(props.location.urlImagem === undefined){
+
+        if(props.location.urlImagem === null){
             return;
         }else {
             try{
@@ -433,7 +437,7 @@ export default function AddFungic(props){
             }
         }
         
-        if(props.location.urlImagemVerso === undefined){
+        if(props.location.urlImagemVerso === null){
             return;
         }else {
             try{
@@ -460,7 +464,7 @@ export default function AddFungic(props){
             }
         }
 
-        if(props.location.urlImagemMicro === undefined){
+        if(props.location.urlImagemMicro === null){
             return;
         }else {
             try{
@@ -490,7 +494,8 @@ export default function AddFungic(props){
 
     useEffect(()=> {
         getImages();
-    }, [])
+    }, [updateTitle]);
+
 
     return (
         <div className='containerAddFungicAll'>
@@ -511,7 +516,7 @@ export default function AddFungic(props){
                         { imageUrl === null && urlImage === '' ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
-                            <img src={imageUrl || urlImage} width="50" height="50" alt="Perspectiva" />
+                            <img src={imageUrl || urlImage} width="50" height="50" />
                         }
                     </label>
                     <label className="label-avatar">
@@ -523,7 +528,7 @@ export default function AddFungic(props){
                         { imageVersoUrl === null && urlVerso === '' ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
-                            <img src={imageVersoUrl || urlVerso} width="50" height="50" alt="Verso" />
+                            <img src={imageVersoUrl || urlVerso} width="50" height="50" />
                         }
                     </label>
                     <label className="label-avatar">
@@ -535,15 +540,23 @@ export default function AddFungic(props){
                         { imageMicroUrl === null && urlMicro === '' ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
-                            <img src={imageMicroUrl || urlMicro} width="50" height="50" alt="Microorganismo" />
+                            <img src={imageMicroUrl || urlMicro} width="50" height="50" />
                         }
                     </label>
-                    <span>Apagar fotos: <FiXCircle onClick={()=> {
-                        setImageUrl(null);
-                        setImageVersoUrl(null);
-                        setImageMicroUrl(null);
-                    }} color="#FFF" size={25}  />
-                    </span>
+                        {activeDeletePhotos ?
+                            <span>Apagar fotos: <FiXCircle onClick={()=> {
+                                setImageUrl(null);
+                                setImageUrl(null);
+                                setImageVersoUrl(null);
+                                setImageVersoUrl(null);
+                                setImageMicroUrl(null);
+                                setImageMicroUrl(null);
+                            }} color="#FFF" size={25} cursor="pointer" />
+                            </span>
+                            :
+                            null
+                        }
+                        
                 </div>
                     <div className='smallAreaFungic'>
                         <span>Código:</span>
@@ -743,7 +756,7 @@ export default function AddFungic(props){
                     <div style={{marginTop: 30}}>
                         {props.location.buttonUpdate ?
                             <Stack spacing={2} direction="row">
-                                <Button onClick={editFungic} size='large' variant="contained">ATUALIZAR</Button>
+                                <Button onClick={editFungic} size='large' variant="contained">{updateTitle}</Button>
                             </Stack>
                             :
                             <Stack spacing={2} direction="row">

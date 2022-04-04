@@ -15,6 +15,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import './TableFungic.css';
 import { AuthContext } from '../../contexts/auth';
+import { MicroContext } from '../../contexts/microorganismos';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import htmlToPdfmake from "html-to-pdfmake"
@@ -22,6 +23,7 @@ import htmlToPdfmake from "html-to-pdfmake"
 export default function StickyHeadTable({ dataFungic, getFungic }) {
   let history = useHistory();
   const { token } = useContext(AuthContext);
+  const { setActiveDeletePhotos } = useContext(MicroContext);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [buttonUpdate, setButtonUpdate] = useState(true);
@@ -50,7 +52,7 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
   };
 
   const directionEdit = async (item, itemMorph, itemHost)=> {
-    
+    setActiveDeletePhotos(false);
     history.push({pathname: 'adicao-fungica', 
     codigo: item.codigo,
     identMolecular: item.identMolecular,
@@ -85,6 +87,7 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
   }
 
   async function getMorphological(item){
+    
     try{
         let responseMorph = await api.get('/morfologias',{
           headers:{

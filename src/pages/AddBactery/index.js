@@ -132,11 +132,11 @@ export default function AddBactery(props){
         setPassValidation(false);
         
         if(imageUrl === undefined){
-            return alert('Adicione pelo menos uma imagem para continuar o registro deste fungo.');
+            return alert('Adicione pelo menos uma imagem para continuar o registro deste microorganismo.');
         }
 
-        if(morphological === '' || host === ''){
-            return alert('Escolha uma identificação Morfológica e uma Origem para o hospedeiro.');
+        if(host === ''){
+            return alert('Escolha uma Origem para o hospedeiro.');
         }
 
         const body = {
