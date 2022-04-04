@@ -10,11 +10,13 @@ import api from '../../services/api';
 import { AuthContext } from '../../contexts/auth';
 import { FiUpload, FiXCircle } from 'react-icons/fi';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import { MicroContext } from '../../contexts/microorganismos';
 
 
 export default function AddBactery(props){
     let history = useHistory();
     const { token } = useContext(AuthContext);
+    const { activeDeletePhotos } = useContext(MicroContext);
     const [title, setTitle] = useState('CADASTRAR COLÔNIA BACTERIANA');
     const [visible, setVisible] = useState(false);
     const [offSearch, setOffSearch] = useState(false);
@@ -457,10 +459,15 @@ export default function AddBactery(props){
                             <img src={imageMicroUrl} width="50" height="50" alt="Microorganismo" />
                         }
                     </label>
-                    <span>Apagar foto: <FiXCircle onClick={()=> {
-                        setImageMicroUrl(null);
-                    }} color="#FFF" size={25}  />
-                    </span>
+                    {activeDeletePhotos ?
+                        <span>Apagar foto: <FiXCircle onClick={()=> {
+                            setImageMicroUrl(null);
+                        }} color="#FFF" size={25}  cursor="pointer"/>
+                        </span>
+                        :
+                        null
+                    }
+                    
                 </div>
                     <div className='smallAreaBactery'>
                         <span>Código:</span>

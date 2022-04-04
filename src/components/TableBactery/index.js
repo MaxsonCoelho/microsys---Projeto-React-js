@@ -18,10 +18,12 @@ import './TableBactery.css';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 import htmlToPdfmake from "html-to-pdfmake"
+import { MicroContext } from '../../contexts/microorganismos';
 
 export default function StickyHeadTable({ dataBactery, getBactery }) {
   let history = useHistory();
   const { token } = useContext(AuthContext);
+  const { setActiveDeletePhotos } = useContext(MicroContext);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [buttonUpdate, setButtonUpdate] = useState(true);
@@ -45,7 +47,7 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
   };
 
   const directionEdit = async (item, itemMorph, itemHost)=> {
-    
+    setActiveDeletePhotos(false);
     history.push({pathname: 'adicao-bacteriana/', 
     codigo: item.codigo,
     identMolecular: item.identMolecular,

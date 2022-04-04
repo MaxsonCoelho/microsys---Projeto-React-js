@@ -8,10 +8,12 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import api from '../../services/api';
 import { AuthContext } from '../../contexts/auth';
 import CircularIndeterminate from '../../components/CircularProgress';
+import { MicroContext } from '../../contexts/microorganismos';
 
 
 export default function CollectionBactery() {
   const { token } = useContext(AuthContext);
+  const { setActiveDeletePhotos } = useContext(MicroContext);
   const [title, setTitle] = useState('COLÔNIAS BACTERIANAS');
   const [visible, setVisible] = useState(true);
   const [offSearch, setOffSearch] = useState(true);
@@ -41,6 +43,7 @@ export default function CollectionBactery() {
   }
 
   useEffect(()=> {
+    setActiveDeletePhotos(true);
     getBactery();
   }, [])
 
