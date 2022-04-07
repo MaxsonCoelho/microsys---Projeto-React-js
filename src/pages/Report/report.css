@@ -1,0 +1,53 @@
+.containerAll{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.containerTableBactery{
+    padding: 150px 200px 0px 200px;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+}
+
+.areaButton{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+
+#btnAdd{
+    width: 100px;
+    height: 40px;
+}
+
+@media (max-width: 700px) {
+    .containerAll{
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+    }
+    
+    .containerTableBactery{
+        padding: 150px 0px 0px 0px;
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+    }
+    
+    .areaButton{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    
+    
+    #btnAdd{
+        width: 100px;
+        height: 40px;
+    }
+}

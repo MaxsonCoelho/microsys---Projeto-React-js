@@ -8,6 +8,7 @@ import CollectionFungic from '../pages/CollectionFungic';
 import AddFungic from "../pages/AddFungic";
 import AddBactery from "../pages/AddBactery";
 import Profile from "../pages/Profile";
+import Report from '../pages/Report';
 
 export default function Routes(){
     
@@ -21,6 +22,7 @@ export default function Routes(){
             <Route exact path="/gerenciamento-de-usuarios/" component={GerencyUsers} isPrivate/>
             <Route exact path="/adicao-fungica" component={AddFungic} isPrivate/>
             <Route exact path="/adicao-bacteriana/" component={AddBactery} isPrivate/>
+            <Route exact path="/report/" component={Report} isPrivate/>
         </Switch>
     )
 }
