@@ -29,9 +29,14 @@ export default function Report() {
 
   async function searchReport() {
 
-    const response = await api.get(`/reports/${valueSelection}?identMolecular=${identMolecular}&cor=${color}&pigmento=${pigment}&propriedades=${property}`)
-    const res = response.data;
-    console.log(res);
+    if(valueSelection) {
+      const response = await api.get(`/reports/${valueSelection}?identMolecular=${identMolecular}&cor=${color}&pigmento=${pigment}&propriedades=${property}`)
+      const res = response.data;
+      setDataReport(res);
+      console.log(res);
+    } else {
+      alert('Selecione Bactérias ou Fungos para criar um relatório.');
+    }
   }
 
   function clientePDF(item){
@@ -140,7 +145,7 @@ export default function Report() {
       {loading ?
         <CircularIndeterminate />
         :
-        <TableReport dataBactery={dataBactery} />
+        <TableReport dataReport={dataReport} />
       }
       </div>
       <div style={{alignSelf: 'center', marginTop: 10}} className='areaButton'>
