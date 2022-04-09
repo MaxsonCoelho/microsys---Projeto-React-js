@@ -39,73 +39,108 @@ export default function Report() {
     }
   }
 
-  function clientePDF(item){
+
+  function clientePDF(dataReport){
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
-    const reportTitle = [
-      {
-        text: 'Centro de Biotécnologia da Amazônia',
-        fontSize: 20,
-        bold: true,
-        margin: [135, 20, 0, 30] // left, top, right, bottom
-      }
-    ];
-    const html = htmlToPdfmake(
-      ` <h5>Microorganismo Bacteriano</h5>
-      <table width="100%" border="1"  cellpadding="0" cellspacing="0">
-      <tr>
-         <td width="11%" >
-            <table><font  size="1">
-                 <tr><td><strong>Código: ${item.codigo}</strong></td></tr>
-                 <tr><td><strong>Identificação Molecular: ${item.identMolecular == undefined ? 'Não especificado' : item.identMolecular}</strong></td></tr>
-                 <tr><td><strong>Cor: ${item.cor == undefined ? 'Não especificado' : item.cor}</strong></td></tr>
-                 <tr><td><strong>Forma: ${item.forma  == undefined ? 'Não especificado' : item.forma}</strong></td></tr>
-                 <tr><td><strong>Elevação: ${item.elevacao == undefined ? 'Não especificado' : item.elevacao}</strong></td></tr>
-                 <tr><td><strong>Tipo de Crescimento: ${item.tipoCresc == undefined ? 'Não especificado' : item.tipoCresc}</strong></td></tr>
-                 <tr><td><strong>Borda: ${item.borda == undefined ? 'Não especificado' : item.borda}</strong></td></tr>
-                 <tr><td><strong>Esporula: ${item.esporula == undefined ? 'Não especificado' : item.esporula}</strong></td></tr>
-                 <tr><td><strong>Superfície: ${item.superficie == undefined ? 'Não especificado' : item.superficie}</strong></td></tr>
-                 <tr><td><strong>Consistência: ${item.consistencia == undefined ? 'Não especificado' : item.consistencia}</strong></td></tr>
-                 <tr><td><strong>Detalhes Ópticos: ${item.detOpticos == undefined ? 'Não especificado' : item.detOpticos}</strong></td></tr>
-                 <tr><td><strong>Pigmento: ${item.pigmento == undefined ? 'Não especificado' : item.pigmento}</strong></td></tr>
-                 <tr><td><strong>Propriedades: ${item.propriedades == undefined ? 'Não especificado' : item.propriedades}</strong></td></tr>
-                 <tr><td><strong>Meio de Isolamento: ${item.meioIsolamento == undefined ? 'Não especificado' : item.meioIsolamento}</strong></td></tr>
-                 <tr><td><strong>Tempo de Incubação: ${item.tempIncubacao == undefined ? 'Não especificado' : item.tempIncubacao}</strong></td></tr>
-                 <tr><td><strong>Descrição do Isolado: ${item.descricaoIsolado == undefined ? 'Não especificado' : item.descricaoIsolado}</strong></td></tr>
-                 <tr><td><strong>Data de Coleta: ${item.dataColeta == undefined ? 'Não especificado' : item.dataColeta}</strong></td></tr>
-                 <tr><td><strong>Local de Coleta: ${item.localColeta == undefined ? 'Não especificado' : item.localColeta}</strong></td></tr>
-                 <tr><td><strong>Data de Reativação: ${item.dataReativacao == undefined ? 'Não especificado' : item.dataReativacao}</strong></td></tr>
-                 </tr></font>
-             </table>
-        </td>
-      </tr>
-   </table>
-   `
-    )
-    function rodape(currentPage, pageCount){
-      return [
+    if(valueSelection == 'bacterias'){
+      const reportTitle = [
         {
-          text: currentPage + ' / ' + pageCount,
-          alignment: 'right',
-          fontSize: 16,
+          text: 'Centro de Biotécnologia da Amazônia',
+          fontSize: 20,
           bold: true,
-          margin: [0, 10, 20, 0] // left, top, right, bottom
+          margin: [250, 20, 0, 60] // left, top, right, bottom
         }
-      ]
-    }
-    const docDefinitions = {
-      pageSize: 'A4',
-      pageMargins: [15, 50, 15, 40],
-      header: [reportTitle],
-      content: [html],
-      footer: rodape
-    }
+      ];
+  
+      const data = dataReport.map((item) => {
+        return [item.codigo, item.cor, item.forma, item.elevacao, item.borda, item.superficie, item.consistencia, item.dataColeta, item.dataReativacao, item.identMolecular, item.localColeta, item.pigmento, item.propriedades, item.tempIncubacao]
+      })
 
-    pdfMake.createPdf(docDefinitions).download();
+      const title = {text: 'MICROORGANISMOS BACTERIANOS', style: 'header', }
+      
+      const html = {
+        style: 'tableExample',
+        fontSize: 10,
+        table: {
+          body: [
+            ['Código', 'Cor', 'Forma', 'Elevação', 'Borda', 'Superfície', 'Consistência', 'Data de Coleta', 'Data de Reativação', 'Ident Molecular', 'Local de Coleta', 'Pigmento', 'Propriedades', 'Tempo de Incubação'],
+            ...data
+          ]
+        }
+      }
+      
+      function rodape(currentPage, pageCount){
+        return [
+          {
+            text: currentPage + ' / ' + pageCount,
+            alignment: 'right',
+            fontSize: 14,
+            bold: true,
+            margin: [0, 10, 20, 0] // left, top, right, bottom
+          }
+        ]
+      }
+      const docDefinitions = {
+        pageSize: 'A4',
+        pageOrientation: 'landscape',
+        pageMargins: [15, 50, 15, 40],
+        header: [reportTitle],
+        content: [title, html],
+        footer: rodape
+      }
+  
+      pdfMake.createPdf(docDefinitions).download();
+    }else {
+      const reportTitle = [
+        {
+          text: 'Centro de Biotécnologia da Amazônia',
+          fontSize: 20,
+          bold: true,
+          margin: [250, 20, 0, 40] // left, top, right, bottom
+        }
+      ];
+  
+      const data = dataReport.map((item) => {
+        return [item.codigo, item.cor, item.forma, item.elevacao, item.borda, item.superficie, item.dataColeta, item.dataReativacao, item.descricaoIsolado, item.identMolecular, item.localColeta, item.pigmento, item.propriedades, item.tempIncubacao]
+      })
+
+      const title = {text: 'MICROORGANISMOS FÚNGICOS', style: 'header', }
+      
+      const html = {
+        style: 'tableExample',
+        fontSize: 10,
+        table: {
+          body: [
+            ['Código', 'Cor', 'Forma', 'Elevação', 'Borda', 'Superfície', 'Data de Coleta', 'Data de Reativação', 'Desc do Isolado', 'Ident Molecular', 'Local de Coleta', 'Pigmento', 'Propriedades', 'Tempo de Incubação'],
+            ...data
+          ]
+        }
+      }
+      
+      function rodape(currentPage, pageCount){
+        return [
+          {
+            text: currentPage + ' / ' + pageCount,
+            alignment: 'right',
+            fontSize: 14,
+            bold: true,
+            margin: [0, 10, 20, 0] // left, top, right, bottom
+          }
+        ]
+      }
+      const docDefinitions = {
+        pageSize: 'A4',
+        pageOrientation: 'landscape',
+        pageMargins: [15, 50, 15, 40],
+        header: [reportTitle],
+        content: [title, html],
+        footer: rodape
+      }
+  
+      pdfMake.createPdf(docDefinitions).download();
+    }
   }
-
-  useEffect(()=> {
-    
-  }, [])
+  
 
   return (
     <div className="containerAll">
@@ -150,7 +185,7 @@ export default function Report() {
       </div>
       <div style={{alignSelf: 'center', marginTop: 10}} className='areaButton'>
         <Button variant="contained"> 
-          <PrintIcon onClick={clientePDF}  />
+          <PrintIcon onClick={()=> clientePDF(dataReport)}  />
         </Button>
       </div>
     </div>
