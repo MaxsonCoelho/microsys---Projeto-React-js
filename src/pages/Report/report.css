@@ -12,7 +12,6 @@
     height: 120px;
     margin-top: 130px;
     justify-content: center;
-    background-color: #eee;
 }
 
 #inputSearch {
@@ -60,9 +59,39 @@
         flex-direction: column;
         background-color: #fff;
     }
+
+    .areaSearch {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 350px;
+        margin-top: 150px;
+        align-items: center;
+        justify-content: center;
+    }
     
-    .containerTableBactery{
-        padding: 150px 0px 0px 0px;
+    #inputSearch {
+        height: 40px;
+        width: 150px;
+        margin-right: 10px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #ccc;
+        padding-left: 5px;
+        border-radius: 10px;
+    }
+    
+    .smallAreaSelection {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        height: 60px;
+        margin: 2px;
+        align-items: center;
+    }
+    
+    .containerTableBacteryReport{
+        padding: 20px 0px 0px 0px;
         flex-direction: column;
         display: flex;
         justify-content: center;
@@ -72,11 +101,13 @@
         width: 100%;
         display: flex;
         justify-content: center;
+        margin-bottom: 30px;
     }
     
     
     #btnAdd{
         width: 100px;
         height: 40px;
+        
     }
 }

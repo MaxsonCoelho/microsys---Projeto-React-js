@@ -674,7 +674,6 @@ export default function AddFungic(props){
                             <option value='brilhante'>brilhante</option>
                             <option value='pulverulenta'>pulverulenta</option>
                             <option value='sulcos'>sulcos</option>
-                            <option value='protuberância'>protuberância</option>
                         </select>
                     </div>
                 </div>
