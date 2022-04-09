@@ -35,11 +35,16 @@ export default function Home({isPrivate}) {
               COLEÇÃO FÚNGICA
             </button>
           </Link>
-          {master === true &&
-          <Link to='/gerenciamento-de-usuarios' >
+          <Link to='/report' >
             <button >
-              GERÊNCIA DE USUÁRIOS
+              RELATÓRIOS
             </button>
+          </Link>
+          {master === true &&
+            <Link to='/gerenciamento-de-usuarios' >
+              <button >
+                GERÊNCIA DE USUÁRIOS
+              </button>
             </Link>
           }
         </div>
