@@ -93,7 +93,7 @@ export default function Report() {
     }else {
       const reportTitle = [
         {
-          text: 'Centro de Biotécnologia da Amazônia',
+          text: 'Centro de Biotecnologia da Amazônia',
           fontSize: 20,
           bold: true,
           margin: [250, 20, 0, 40] // left, top, right, bottom
