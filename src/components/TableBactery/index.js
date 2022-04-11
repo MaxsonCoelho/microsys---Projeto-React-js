@@ -105,7 +105,7 @@ export default function StickyHeadTable({ dataBactery, getBactery }) {
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
     const reportTitle = [
       {
-        text: 'Centro de Biotécnologia da Amazônia',
+        text: 'Centro de Biotecnologia da Amazônia',
         fontSize: 20,
         bold: true,
         margin: [135, 20, 0, 30] // left, top, right, bottom

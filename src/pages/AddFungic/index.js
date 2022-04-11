@@ -514,7 +514,7 @@ export default function AddFungic(props){
                         </span>
 
                         <input type="file" accept="image/*" onChange={handleFileImage}  /><br/>
-                        { imageUrl === null ? 
+                        { urlImage === null ? 
                             <>
                             {updateTitle ?
                                 <CircularIndeterminate />
@@ -524,7 +524,7 @@ export default function AddFungic(props){
                             <AddPhotoAlternateIcon width="50" height="50"/>
                             </>
                             :
-                            <img src={imageUrl || urlImage} width="50" height="50" />
+                            <img src={urlImage || imageUrl} width="50" height="50" />
                         }
                     </label>
                     <label className="label-avatar">
@@ -533,10 +533,10 @@ export default function AddFungic(props){
                         </span>
 
                         <input type="file" accept="image/*" onChange={handleFileImageVerso}  /><br/>
-                        { imageVersoUrl === null ? 
+                        { urlVerso === null ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
-                            <img src={imageVersoUrl || urlVerso} width="50" height="50" />
+                            <img src={urlVerso || imageVersoUrl} width="50" height="50" />
                         }
                     </label>
                     <label className="label-avatar">
@@ -545,10 +545,10 @@ export default function AddFungic(props){
                         </span>
 
                         <input type="file" accept="image/*" onChange={handleFileImageMicro}  /><br/>
-                        { imageMicroUrl === null ? 
+                        { urlMicro === null ? 
                             <AddPhotoAlternateIcon width="50" height="50" />
                             :
-                            <img src={imageMicroUrl || urlMicro} width="50" height="50" />
+                            <img src={urlMicro || imageMicroUrl} width="50" height="50" />
                         }
                     </label>
                         {activeDeletePhotos ?
