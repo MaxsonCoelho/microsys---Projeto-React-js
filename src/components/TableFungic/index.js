@@ -142,7 +142,7 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
 
   async function generateImage(item){
     try{
-      if(item.urlImagem != null){
+      if(item.urlImagem != 'undefined'){
         let image;
         let response = await api.get(`/files/image?urlImage=${item.urlImagem}`, 
         { 
@@ -157,9 +157,12 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
         image = Buffer.from(result, 'binary').toString('base64');
         const formatImage = image ? ('data:image/;base64, ' + image) : undefined;
         setFormatImageHtml1(formatImage);
+      }else {
+        setFormatImageHtml1('undefined');
       }
       
-      if(item.urlImagemVerso != null){
+      if(item.urlImagemVerso != 'undefined'){
+        
         let image2;
         let response2 = await api.get(`/files/image?urlImage=${item.urlImagemVerso}`, 
         { 
@@ -174,9 +177,13 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
         image2 = Buffer.from(result2, 'binary').toString('base64');
         const formatImage2 = image2 ? ('data:image/;base64, ' + image2) : undefined;
         setFormatImageHtml2(formatImage2);
+
+      }else {
+        setFormatImageHtml2('undefined');
       }
       
-      if(item.urlImagemMicro != null){
+      if(item.urlImagemMicro != 'undefined'){
+        
         let image3;
         let response3 = await api.get(`/files/image?urlImage=${item.urlImagemMicro}`, 
         { 
@@ -191,6 +198,8 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
         image3 = Buffer.from(result3, 'binary').toString('base64');
         const formatImage3 = image3 ? ('data:image/;base64, ' + image3) : undefined;
         setFormatImageHtml3(formatImage3);
+      }else {
+        setFormatImageHtml3('undefined');
       }
 
       clientePDF(item, formatImagehtml1, formatImagehtml2, formatImagehtml3);
@@ -203,6 +212,7 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
 
   function clientePDF(item, formatImage, formatImage2, formatImage3){
     pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    
     const reportTitle = [
       {
         text: 'Centro de Biotecnologia da Amazônia',
@@ -224,7 +234,7 @@ export default function StickyHeadTable({ dataFungic, getFungic }) {
     }
     const html = htmlToPdfmake(
       ` <h5>Microorganismo Fúngico</h5>
-      <p>Foto 1</p><img src="${formatImage}" width="70" height="70"/>${formatImage2 ? `<p>Foto 2</p><img src="${formatImage2}" width="70" height="70"/>`: null}${formatImage3 ? `<p>Foto 3</p><img src="${formatImage3}" width="70" height="70"/>`: null}
+      ${formatImage != 'undefined' ? `<p>Foto 1</p><img src="${formatImage}" width="70" height="70"/>`: ''}${formatImage2 != 'undefined' ? `<p>Foto 2</p><img src="${formatImage2}" width="70" height="70"/>`: ''}${formatImage3 != 'undefined' ? `<p>Foto 3</p><img src="${formatImage3}" width="70" height="70"/>`: ''}
       <p>Detalhes</p>
       <table width="100%" border="1"  cellpadding="0" cellspacing="0">
       <tr>
