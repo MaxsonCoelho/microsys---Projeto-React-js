@@ -5,7 +5,7 @@ const prod = 'https://api.labmicrocba.com.br/microsys'
 const dev = 'http://localhost:5002'
 
 const api = axios.create({
-  baseURL: dev, //BaseUrl server
+  baseURL: prod, //BaseUrl server
   headers: {
     'Accept': '*/*',
     'Content-Type': 'application/json; charset=utf-8'
